@@ -1,0 +1,34 @@
+# Generated files
+*_static.svg
+*_dynamic.svg
+
+# Test outputs
+test_output/
+*.test.svg
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pub
+.packages
+.pub/
+pubspec.lock
+
+# Build
+build/
+
+# Dart tools
+.dart_tool/
+
+# Example build
+example/build/
+example/.dart_tool/
+example/pubspec.lock
