@@ -28,10 +28,9 @@ A Dart command-line tool to automatically split SVG files into static and dynami
 
 <!-- Alternative: GIF animation -->
 <div align="center">
-  <img src="demo.gif" alt="SVG Splitter Demo" width="600">
+  <img src="demo.gif" alt="SVG Splitter Demo" width="600" height="400">
 </div>
 
-See [ADD_VIDEO_PREVIEW.md](ADD_VIDEO_PREVIEW.md) for detailed instructions on adding a video preview.
 
 ## Features
 
