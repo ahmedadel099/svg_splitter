@@ -4,6 +4,35 @@ A Dart command-line tool to automatically split SVG files into static and dynami
 
 [![pub package](https://img.shields.io/pub/v/svg_splitter.svg)](https://pub.dev/packages/svg_splitter)
 
+## 🎥 Video Preview
+
+<!-- TODO: Add your video preview here -->
+
+<!-- Recommended: YouTube embed -->
+<!-- 
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID">
+    <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg" alt="SVG Splitter Demo" width="600">
+  </a>
+  <p><a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID">▶️ Watch Demo Video</a></p>
+</div>
+-->
+
+<!-- Alternative: GitHub video (drag .mp4 to GitHub issue/PR to get URL) -->
+<!-- 
+<div align="center">
+  <video src="YOUR_GITHUB_VIDEO_URL" controls width="600"></video>
+  <p>Demo: SVG Splitter in action</p>
+</div>
+-->
+
+<!-- Alternative: GIF animation -->
+<div align="center">
+  <img src="demo.gif" alt="SVG Splitter Demo" width="600">
+</div>
+
+See [ADD_VIDEO_PREVIEW.md](ADD_VIDEO_PREVIEW.md) for detailed instructions on adding a video preview.
+
 ## Features
 
 - 🎨 **Automatic splitting** - Detects dynamic colors and splits SVG files automatically
@@ -55,18 +84,14 @@ svg_splitter assets/icons/my_icon.svg
 dart run packages/svg_splitter/bin/svg_splitter.dart assets/icons/my_icon.svg
 ```
 
-This creates:
-- `assets/icons/my_icon_static.svg` (static parts - grey, black, etc.)
-- `assets/icons/my_icon_dynamic.svg` (dynamic parts - set to black `#000000`)
-
 ### With Custom Dynamic Colors
 
 ```bash
 # Single custom color
-dart run svg_splitter assets/icons/icon.svg --dynamic-color=#FF0000
+dart pub run svg_splitter assets/icons/icon.svg --dynamic-color=#FF0000
 
 # Multiple custom colors
-dart run svg_splitter assets/icons/icon.svg \
+dart pub run svg_splitter assets/icons/icon.svg \
   --dynamic-color=#FF0000 \
   --dynamic-color=#DB1C42
 ```
@@ -74,13 +99,13 @@ dart run svg_splitter assets/icons/icon.svg \
 ### Custom Output Directory
 
 ```bash
-dart run svg_splitter assets/icons/icon.svg --output-dir=assets/icons/split
+dart pub run svg_splitter assets/icons/icon.svg --output-dir=assets/icons/split
 ```
 
 ### Help
 
 ```bash
-dart run svg_splitter --help
+dart pub run svg_splitter --help
 ```
 
 ## How It Works
@@ -127,7 +152,7 @@ dart run svg_splitter --help
 
 ### 3. Split the SVG
 ```bash
-dart run svg_splitter assets/icons/my_icon.svg
+dart pub run svg_splitter assets/icons/my_icon.svg
 ```
 
 ### 4. Use in Flutter
@@ -151,7 +176,7 @@ For detailed Flutter setup, see [SETUP.md](SETUP.md).
 ## Command Reference
 
 ```bash
-dart run svg_splitter <input.svg> [options]
+dart pub run svg_splitter <input.svg> [options]
 
 Options:
   --dynamic-color=<color>    Colors to treat as dynamic (can be used multiple times)
@@ -172,33 +197,7 @@ Options:
 - [Installation Guide](INSTALL.md) - Detailed installation instructions
 - [Setup Guide](SETUP.md) - Integration with Flutter projects
 - [Publishing Guide](PUBLISH.md) - How to publish updates
-
-## Troubleshooting
-
-**Tool not found?**
-```bash
-dart pub get
-dart run svg_splitter --help
-```
-
-**Wrong colors detected?**
-Specify your exact dynamic colors:
-```bash
-dart run svg_splitter icon.svg --dynamic-color=#YOUR_EXACT_COLOR
-```
-
-**Paths not split correctly?**
-- Ensure SVG uses `fill="#COLOR"` format (not CSS classes)
-- Check that colors are in hex format
-- Verify SVG structure is valid
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-MIT License - see [LICENSE](LICENSE) file for details
+- [Adding Video Preview](ADD_VIDEO_PREVIEW.md) - How to add video demos
 
 ## Example App
 
@@ -217,6 +216,33 @@ flutter run
 ```
 
 See `example/README.md` for detailed instructions.
+
+## Troubleshooting
+
+**Tool not found?**
+```bash
+dart pub get
+dart pub run svg_splitter --help
+```
+
+**Wrong colors detected?**
+Specify your exact dynamic colors:
+```bash
+dart pub run svg_splitter icon.svg --dynamic-color=#YOUR_EXACT_COLOR
+```
+
+**Paths not split correctly?**
+- Ensure SVG uses `fill="#COLOR"` format (not CSS classes)
+- Check that colors are in hex format
+- Verify SVG structure is valid
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details
 
 ## Related Packages
 
