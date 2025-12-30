@@ -48,7 +48,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dev_dependencies:
-  svg_splitter: ^1.0.2
+  svg_splitter: ^1.0.3
 ```
 
 Then run:
