@@ -1,3 +1,8 @@
+## 1.0.1
+
+- Fixed GIF preview display on pub.dev (using GitHub raw URL)
+- Updated documentation version references
+
 ## 1.0.0
 
 - Initial release of SVG Splitter

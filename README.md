@@ -28,7 +28,7 @@ A Dart command-line tool to automatically split SVG files into static and dynami
 
 <!-- Alternative: GIF animation -->
 <div align="center">
-  <img src="demo.gif" alt="SVG Splitter Demo" width="600" height="400">
+  <img src="https://raw.githubusercontent.com/ahmedadel099/svg_splitter/main/demo.gif" alt="SVG Splitter Demo" width="600" height="200">
 </div>
 
 
@@ -48,7 +48,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dev_dependencies:
-  svg_splitter: ^1.0.0
+  svg_splitter: ^1.0.1
 ```
 
 Then run:
