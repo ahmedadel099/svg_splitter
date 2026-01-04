@@ -57,3 +57,7 @@ When you publish from `packages/svg_splitter/`:
 
 **Example app is automatically included** - you don't need to publish it separately!
 
+
+
+
+

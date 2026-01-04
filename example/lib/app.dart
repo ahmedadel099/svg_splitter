@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/theme_bloc.dart';
 import 'widgets/themed_svg_icon.dart';
 import 'widgets/color_picker_button.dart';
+import 'screens/comparison_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -14,32 +15,41 @@ class App extends StatelessWidget {
         title: const Text('SVG Splitter Demo'),
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
             // Header
             _buildHeader(context),
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
             
-            // Instructions
-            _buildInstructionsCard(context),
-            const SizedBox(height: 32),
+            // Theme Color Changer (Move to top for easier access)
+            _buildThemeChanger(context),
+            const SizedBox(height: 24),
             
             // Icon Demo
             _buildIconDemo(context),
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
             
-            // Theme Color Changer
-            _buildThemeChanger(context),
-            const SizedBox(height: 32),
+            // Comparison Button
+            _buildComparisonButton(context),
+            const SizedBox(height: 24),
+            
+            // Instructions
+            _buildInstructionsCard(context),
+            const SizedBox(height: 24),
             
             // How It Works
             _buildHowItWorks(context),
+            const SizedBox(height: 24),
           ],
         ),
       ),
+        ),
     );
   }
 
@@ -155,20 +165,32 @@ class App extends StatelessWidget {
         return Card(
           elevation: 2,
           child: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                Text(
-                  'Themed SVG Icon',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.palette,
+                      color: Theme.of(context).colorScheme.primary,
+                      size: 24,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Themed SVG Icon',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 12),
                 Text(
                   'Static parts (grey) stay unchanged',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
+                const SizedBox(height: 4),
                 Text(
                   'Dynamic parts change with theme',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -176,14 +198,15 @@ class App extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 20),
                 Container(
-                  padding: const EdgeInsets.all(32),
+                  padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color: Theme.of(context).dividerColor,
+                      width: 1.5,
                     ),
                   ),
                   child: ThemedSvgIcon(
@@ -194,34 +217,45 @@ class App extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text(
-                  'Current Theme Color',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                const SizedBox(height: 8),
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: primaryColor,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Theme.of(context).dividerColor,
-                      width: 2,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Current Theme: ',
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      _colorToHex(primaryColor),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'monospace',
+                    Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: primaryColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Theme.of(context).dividerColor,
+                          width: 2,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: primaryColor.withValues(alpha: 0.3),
+                            blurRadius: 8,
+                            spreadRadius: 2,
+                          ),
+                        ],
                       ),
-                      textAlign: TextAlign.center,
+                      child: Center(
+                        child: Text(
+                          _colorToHex(primaryColor),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 9,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'monospace',
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
@@ -231,29 +265,98 @@ class App extends StatelessWidget {
     );
   }
 
+  Widget _buildComparisonButton(BuildContext context) {
+    return Card(
+      elevation: 2,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ComparisonScreen(),
+            ),
+          );
+        },
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.compare_arrows,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 28,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'SVG vs ColorFiltered',
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'View detailed comparison with examples',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildThemeChanger(BuildContext context) {
     return Card(
       elevation: 2,
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Change Theme Color',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+            Row(
+              children: [
+                Icon(
+                  Icons.color_lens,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 24,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  'Change Theme Color',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
             Text(
               'Tap any color to see the icon\'s dynamic parts change:',
-              style: Theme.of(context).textTheme.bodySmall,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 16),
             Wrap(
               spacing: 12,
               runSpacing: 12,
+              alignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 ColorPickerButton(
                   color: const Color(0xFFE71E46),
@@ -393,8 +496,9 @@ class App extends StatelessWidget {
     );
   }
 
+
   String _colorToHex(Color color) {
-    // Convert color to hex string
+    // Convert color to hex string using toARGB32 (non-deprecated method)
     final argb = color.value.toRadixString(16).padLeft(8, '0');
     // Skip alpha channel (first 2 chars), keep RGB
     return '#${argb.substring(2).toUpperCase()}';

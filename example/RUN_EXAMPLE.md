@@ -46,3 +46,7 @@ svg_splitter assets/icons/icon.svg
 - ✅ Visual demonstration of static vs dynamic parts
 - ✅ Complete working implementation
 
+
+
+
+

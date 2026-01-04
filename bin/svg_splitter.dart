@@ -107,16 +107,35 @@ void _splitSvg(String inputPath, List<String> dynamicColors, String? outputDir) 
   final svgContent = inputFile.readAsStringSync();
   print('📖 Read SVG file (${svgContent.length} bytes)');
 
-  // Parse file path
-  final inputPathParts = inputPath.split('/');
-  final fileName = inputPathParts.last;
-  final baseName = fileName.substring(0, fileName.lastIndexOf('.'));
-  final extension = fileName.substring(fileName.lastIndexOf('.'));
-  final basePath = inputPath.substring(0, inputPath.lastIndexOf('/'));
+  // Parse file path (cross-platform compatible)
+  final inputFileObj = File(inputPath);
   
-  final outputBasePath = outputDir ?? basePath;
-  final staticPath = '$outputBasePath/${baseName}_static$extension';
-  final dynamicPath = '$outputBasePath/${baseName}_dynamic$extension';
+  // Get file name safely (handles both / and \ separators)
+  String fileName;
+  try {
+    fileName = inputFileObj.uri.pathSegments.last;
+  } catch (e) {
+    // Fallback: split by both / and \
+    final pathParts = inputPath.replaceAll(r'\', '/').split('/');
+    fileName = pathParts.isNotEmpty ? pathParts.last : inputPath;
+  }
+  
+  // Extract base name and extension
+  final dotIndex = fileName.lastIndexOf('.');
+  if (dotIndex == -1 || dotIndex == 0) {
+    throw Exception('Input file must have an extension (e.g., .svg)');
+  }
+  
+  final baseName = fileName.substring(0, dotIndex);
+  final extension = fileName.substring(dotIndex);
+  
+  // Get base directory
+  final baseDir = inputFileObj.parent.path;
+  
+  // Build output paths
+  final outputBasePath = outputDir ?? baseDir;
+  final staticPath = '$outputBasePath${Platform.pathSeparator}${baseName}_static$extension';
+  final dynamicPath = '$outputBasePath${Platform.pathSeparator}${baseName}_dynamic$extension';
 
   print('📝 Output files:');
   print('   Static:  $staticPath');
@@ -236,4 +255,8 @@ String _normalizeColor(String color) {
   }
   return '#$normalized';
 }
+
+
+
+
 

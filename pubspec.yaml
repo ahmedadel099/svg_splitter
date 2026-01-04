@@ -1,6 +1,6 @@
 name: svg_splitter
 description: A Dart tool to automatically split SVG files into static and dynamic parts for Flutter theming. Perfect for creating themed icons that change colors based on app themes.
-version: 1.0.3
+version: 1.0.4
 homepage: https://github.com/ahmedadel099/svg_splitter
 repository: https://github.com/ahmedadel099/svg_splitter
 

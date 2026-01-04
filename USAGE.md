@@ -66,3 +66,7 @@ dart pub run svg_splitter --help
 - Check the file path is correct
 - Use quotes for paths with spaces: `'assets/anmation icons/icon.svg'`
 
+
+
+
+
